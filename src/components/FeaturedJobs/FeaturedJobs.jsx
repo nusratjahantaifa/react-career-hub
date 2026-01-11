@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Job from '../Job/Job';
-
+import Job from "../Job/Job";
 const FeaturedJobs = () => {   
      const [jobs, setJobs] = useState([]);
 //this is not the best way...
@@ -22,7 +21,7 @@ fetch('jobs.json')
     <div className="grid grid-cols-2 gap-6">
 
         {
-          jobs.slice(0, dataLength).map( job => <Job key={ job.id}  job ={ job } ></Job> )
+          jobs.slice(0, dataLength).map( job =>( <Job key={ job.id}  job ={ job } />))
         }
     </div>
     <div className={ dataLength === jobs.length ? 'hidden' : ''}>
