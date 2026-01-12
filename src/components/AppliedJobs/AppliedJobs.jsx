@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { getStoredJobApplication } from "../../utility/localstorage";
 
 
 const AppliedJobs = () => {
    const jobs = useLoaderData();
-const [appliedJobs] = useState([]);
+const [appliedJobs, setAppliedJobs] = useState([]);
 const [displayJobs, setDisplayJobs] = useState([]);
    const handleJobsFilter = filter =>{
         if(filter === 'all'){
@@ -24,15 +24,15 @@ useEffect (() => {
   const storedJobIds = getStoredJobApplication();
         if (jobs.length > 0) {
          const jobsApplied = [];
-            for (const idInt of storedJobIds) {
-                const job = jobs.find(job => job.id === idInt);
+            for (const id of storedJobIds) {
+                const job = jobs.find(job => job.id === id);
                 if (job) {
                     jobsApplied.push(job)
                 }
             }
-          //  setAppliedJobs(jobsApplied);
-          // setDisplayJobs(jobsApplied);
-           console.log(jobs, storedJobIds, jobsApplied)  
+      setAppliedJobs(jobsApplied);
+         setDisplayJobs(jobsApplied);
+          // console.log(jobs, storedJobIds, jobsApplied)  
         }
   }, [jobs])
   return (
@@ -41,11 +41,15 @@ useEffect (() => {
             <details className="dropdown mb-32">
                 <summary className="m-1 btn">open or close</summary>
                 <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                    <li onClick={() => handleJobsFilter('all')}><a>All</a></li>
+                    {/* <li onClick={() => handleJobsFilter('all')}><a>All</a></li>
                     <li onClick={() => handleJobsFilter('remote')}><a>Remote</a></li>
-                    <li onClick={() => handleJobsFilter('onsite')}><a>onsite</a></li>
+                    <li onClick={() => handleJobsFilter('onsite')}><a>onsite</a></li> */}
+<li><a>All</a></li>
+<li><a>Remote</a></li>
+<li><a>onsite</a></li>
                 </ul>
-            </details>
+            </details> 
+            
             <ul>
                 {
                     displayJobs.map(job => <li key={job.id}>

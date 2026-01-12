@@ -1,5 +1,7 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import './index.css'
 import {
   createBrowserRouter,
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/applied",
          element: <AppliedJobs></AppliedJobs>,
+         loader: () => fetch('/jobs.json')
       },
       {
         path: "/job/:id",
